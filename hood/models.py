@@ -1,4 +1,6 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
+from django.contrib.auth.models import User
 
 
 class Resident(models.Model):
@@ -9,5 +11,11 @@ class Resident(models.Model):
     def __str__(self):
         return self.first_name
 
+    def save_resident(self):
+        self.save()    
+
     class Meta:
-        ordering = ['first_name']    
+        ordering = ['first_name']
+ 
+ class Profile(models.Model):
+    profile_picture =          
