@@ -1,21 +1,36 @@
-{% load bootstrap3 %} {% load static%}
+{% load bootstrap3 %} {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> {% if title%}
-    <title>Hood - {{title}}</title>
-    {%else%}
-    <title>Hood</title>
-    {%endif%} {% block styles %} {% bootstrap_css %}
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">{%endblock%}
+
+    <title>Neighbourhood Watch</title>
+
+    {% block styles %} {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/index.css'%}">
+
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> {% endblock %}
+
 </head>
 
 <body>
-    {% include "navbar.html" %} {% block scripts %}
+    {% include "navbar.html"%} {% block content%} {%endblock%} {% block scripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     {% bootstrap_javascript %} {% endblock %}
+    <!-- <footer>
+        ...
+    </footer> -->
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="{% static 'js/oscars.js' %}"></script>
+    {% block javascript %}
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js">
+    </script>
+    <script src="https://use.fontawesome.com/191e478c5e.js"></script>
+    {% endblock %}
+
 </body>
 
 </html>

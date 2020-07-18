@@ -1,5 +1,5 @@
-{% extends 'base.html' %} {% load static%} {% block content %}
-<div class="w3-display-container bgimg-1 " id="home">
+{% extends 'hoods/base.html' %} {% load static%} {% block content %}
+<div class="w3-display-container" id="home">
 
     <div class="w3-display-middle w3-center">
         <h3 class="w3-text-white">Find Your Best Hood</h3>
@@ -30,7 +30,7 @@
                 </div>
 
                 <header class="hovereffect" style="height:300px">
-                    <img src=" {{ hood.image.cdn_url }}" class="img-responsive w3-image w3-center" style="min-height:100%; max-height:100%">
+                    <img src=" {{ hood.image.url }}" class="img-responsive w3-image w3-center" style="min-height:100%; max-height:100%">
                 </header>
 
                 <div class="w3-container w3-margin">

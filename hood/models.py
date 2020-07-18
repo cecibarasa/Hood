@@ -24,7 +24,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     bio = models.CharField(max_length=100)
     full_names = models.CharField(max_length=300)
-    # hood = models.ForeignKey(Hood,null=True)
+    # hood = models.ForeignKey(Hood,null=True, related_name='hood')
 
     def __str__(self):
         return self.user

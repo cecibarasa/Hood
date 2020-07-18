@@ -6,12 +6,29 @@ from django.contrib import messages
 from . forms import *
 from django.contrib.auth.models import User
 
-# Create your views here.
-# Views for hood
+
 @login_required(login_url='/accounts/login/')
 def index(request):
     hoods = Hood.objects.all()
     return render(request,'hoods/index.html',locals())
+def signup(request):
+    global register_form
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('/')
+    else:
+        form = SignupForm()
+        register_form = {
+            'form': form,
+        }
+    return render(request, 'django_registration/registration_form.html', {'form': form})
+
 
 @login_required(login_url='/accounts/login/')
 def upload_hood(request):
@@ -62,7 +79,7 @@ def search_results(request):
         searched_hood = Hood.search_hood(search_term)
         message = f"{search_term}"
 
-        return render(request, 'search_hood.html',locals())
+        return render(request, 'hoods/search_hood.html',locals())
 
     else:
         message = "You haven't searched for any term"
