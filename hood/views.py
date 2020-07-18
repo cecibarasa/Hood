@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-def welcome(request):
+def index(request):
     return HttpResponse('Welcome to my hood!')
 
