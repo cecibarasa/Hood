@@ -39,7 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'hood',
     'bootstrap3',
+    'crispy_forms',
+    'cloudinary',
 ]
+
+cloudinary.config (
+    cloud_name = 'deabsqrhn',
+    api_key = '535296853749665',
+    api_secret = 'eqeQYGhHGkMhDeG7TKQ2eGsy7nQ'
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -129,3 +137,11 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+LOGIN_URL = "/accounts/login/" # this is the name of the url
+LOGOUT_REDIRECT_URL = "/accounts/login/"
+LOGIN_REDIRECT_URL = "/"
+REGISTRATION_OPEN= True
+ACCOUNT_ACTIVATION_DAYS = 5
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

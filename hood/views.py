@@ -9,9 +9,9 @@ from django.contrib.auth.models import User
 # Create your views here.
 # Views for hood
 @login_required(login_url='/accounts/login/')
-def home(request):
+def index(request):
     hoods = Hood.objects.all()
-    return render(request,'home.html',locals())
+    return render(request,'hoods/index.html',locals())
 
 @login_required(login_url='/accounts/login/')
 def upload_hood(request):
@@ -25,7 +25,7 @@ def upload_hood(request):
             return redirect('home')
     else:
         form = HoodForm()
-    return render(request, 'upload_hood.html', locals())
+    return render(request, 'hoods/upload_hood.html', locals())
 
 
 @login_required(login_url='/accounts/login/')
@@ -36,7 +36,7 @@ def hood(request,hood_id):
     businesses = Business.get_business(hood_id)
     posts = Post.get_post(hood_id)
 
-    return render(request,'hood.html',locals())
+    return render(request,'hoods/hood.html',locals())
 
 
 @login_required(login_url='/accounts/login')
@@ -53,7 +53,7 @@ def leave(request,hood_id):
     current_user = request.user
     current_user.profile.hood = None
     current_user.profile.save()
-    return redirect('home')
+    return redirect('index')
 
 
 def search_results(request):
@@ -66,7 +66,7 @@ def search_results(request):
 
     else:
         message = "You haven't searched for any term"
-        return render(request,'search.html',{"message":message})
+        return render(request,'hoods/search.html',{"message":message})
     
     
 # Views for profile
@@ -83,7 +83,7 @@ def profile(request, username):
     profile = User.objects.get(username=username)
     title = f'@{profile.username} '
 
-    return render(request, 'profile.html', locals()) 
+    return render(request, 'profile/profile.html', locals()) 
 
 
 @login_required(login_url='/accounts/login/')
@@ -99,10 +99,10 @@ def edit(request):
             edit = form.save(commit=False)
             edit.user = request.user
             edit.save()
-            return redirect('profile.html')
+            return redirect('profile/profile.html')
     else:
         form = ProfileForm(instance=user)
-    return render(request, 'edit_profile.html', locals()) 
+    return render(request, 'profile/edit_profile.html', locals()) 
 
 
 # business views
@@ -119,7 +119,7 @@ def upload_business(request):
         return redirect('hood',request.user.profile.hood.id)
     else:
         businessform = BusinessForm()
-    return render(request,'business.html',locals())  
+    return render(request,'profile/business.html',locals())  
 
 
 # Post view
@@ -137,4 +137,4 @@ def add_post(request):
             return redirect('hood',request.user.profile.hood.id)
     else:
         postform = PostForm()
-    return render(request,'upload_post.html',locals())
+    return render(request,'hoods/upload_post.html',locals())
