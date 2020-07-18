@@ -1,4 +1,4 @@
-{%load bootsrap3%}
+{% load bootstrap3 %} {% load static%}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,11 +8,12 @@
     <title>Hood - {{title}}</title>
     {%else%}
     <title>Hood</title>
-    {%endif%} {%block styles} {%boostrap_css%} {%endblock%}
+    {%endif%} {% block styles %} {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">{%endblock%}
 </head>
 
 <body>
-    {% block scripts %}
+    {% include "navbar.html" %} {% block scripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     {% bootstrap_javascript %} {% endblock %}
 </body>
