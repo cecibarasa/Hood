@@ -30,6 +30,18 @@ class HoodTestClass(TestCase):
         hoods = Hood.objects.all()
         self.assertTrue(len(hoods) > 0)
 
+    def test_update_hood(self):
+        self.the_hood.save_hood()
+        self.the_hood.update_hood(self.the_hood.id,'maldives')
+        update = Hood.objects.get(name = "maldives")
+        self.assertEqual(update.name, 'maldives')
+
+    def test_update_residents(self):
+        self.the_hood.save_resident()
+        self.the_hood.update_residents(self.the_hood.id,'maldives')
+        update = Hood.objects.get(name = "maldives")
+        self.assertEqual(update.name, 'maldives')        
+
 class ProfileTestCLass(TestCase):
     '''
     setup self instance of profile
@@ -78,6 +90,12 @@ class BusinessTestClass(TestCase):
         self.burgers.create_business()
         business =  Business.objects.all()
         self.assertTrue(len(business) > 0)
+
+    def test_update_business(self):
+        self.burgers.save_business()
+        self.burgers.update_business(self.burgers.id,'maldives')
+        update = Business.objects.get(business_name = "maldives")
+        self.assertEqual(update.business_name, 'maldives')            
 
 class PostTestClass(TestCase):
     def setUp(self):

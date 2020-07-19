@@ -51,7 +51,13 @@ class Hood(models.Model):
     residents = models.CharField(max_length=100)
     location_name = models.CharField(max_length=100, choices=locations)
 
+    class Meta:
+        ordering = ['-pk']
+
     def save_hood(self):
+        self.save()
+
+    def save_resident(self):
         self.save()
 
 
@@ -67,6 +73,14 @@ class Hood(models.Model):
     @classmethod
     def display_all_hoods(cls):
         return cls.objects.all()
+
+    @classmethod
+    def update_hood(cls,id,name):
+        cls.objects.filter(id=id).update(name=name)
+
+    @classmethod
+    def update_residents(cls,id,name):
+        cls.objects.filter(id = id).update(name = name)            
 
     def __str__(self):
         return self.name
@@ -118,10 +132,13 @@ class Business(models.Model):
     category = models.CharField(max_length=30)
 
     def __str__(self):
-        return self.business_name
+        return self.business_name    
 
     def create_business(self):
         self.save()
+
+    def save_business(self):
+        self.save()    
 
     def delete_business(self):
         self.delete()
@@ -135,4 +152,8 @@ class Business(models.Model):
     @classmethod
     def search_business(cls, search_term):
         business = Business.objects.filter(category__icontains=search_term)
-        return business                                
+        return business
+
+    @classmethod
+    def update_business(cls,id,business_name):
+        cls.objects.filter(id = id).update(business_name = business_name)                                     

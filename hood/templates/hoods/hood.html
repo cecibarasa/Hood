@@ -4,6 +4,9 @@
     <div class="w3-display-topmiddle w3-text-white w3-center w3-padding-top" style="margin-top:5%">
         <strong class="w3-xlarge"><i class="fas fa-map-marker-alt "></i> {{hood.location_name}}, </strong>
         <strong class="w3-xlarge">{{hood.name}}</strong>
+        <form class="navbar-form " role="search" action="{% url 'search_results' %}">
+            <input type="text" name="search" placeholder="&#xF002;  Search business by category" id="input" class="w3-input w3-round-xxlarge w3-text-black" style="font-family: FontAwesome; font-style: normal;  font-weight: normal; text-decoration: inherit; width:500px;">
+        </form>
     </div>
 
     <div class="w3-display-bottomright">

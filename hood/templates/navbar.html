@@ -13,13 +13,7 @@
     <!-- Navbar (sit on top) -->
     <div>
         <div class="w3-bar w3-white w3-card" id="myNavbar">
-            <a href="{% url 'index' %}" class="w3-bar-item w3-button w3-wide w3-hide-medium"><i class="fab fa-houzz"></i>
-                HOOD </a>
-            <h3 class="w3-text-white">Find Your Best Hood</h3>
-            <form class="navbar-form " role="search" action="{% url 'search_results' %}">
-                <input type="text" name="search" placeholder="&#xF002;  Search business by name" id="input" class="w3-input w3-round-xxlarge" style="font-family: FontAwesome; font-style: normal;  font-weight: normal; text-decoration: inherit; width:500px;">
-            </form>
-
+            <a href="{% url 'index' %}" class="w3-bar-item w3-button w3-wide w3-hide-medium"><i class="fas fa-home"></i>HOOD </a>
             <!-- Right-sided navbar links -->
             <div class="w3-right w3-hide-small">
                 <a href="{% url 'index' %}" class="w3-bar-item w3-button">Home</a> {% if user.is_authenticated %}
@@ -30,8 +24,7 @@
                     Profile</a>
 
                 <a href="{% url 'update_profile'%}" class="w3-bar-item w3-button"><i class="fas fa-user-edit"></i> Edit
-                    Profile</a> {% else %}
-                <a href="/logout" style='color:red;' class="w3-bar-item w3-button"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    Profile</a><a href="/logout" style='color:red;' class="w3-bar-item w3-button"><i class="fas fa-sign-out-alt"></i> Logout</a> {% else %}
 
                 <a href="/accounts/login" class="w3-bar-item w3-button"><i class="fas fa-sign-in-alt"></i> Login</a> {% endif %}
 
