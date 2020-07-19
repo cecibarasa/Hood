@@ -19,29 +19,6 @@ class Resident(models.Model):
     class Meta:
         ordering = ['first_name']
  
-class Profile(models.Model):
-    profile_picture = CloudinaryField('image')
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    bio = models.CharField(max_length=100)
-    full_names = models.CharField(max_length=300)
-    # hood = models.ForeignKey(Hood,null=True, related_name='hood')
-
-    def __str__(self):
-        return self.user
-
-    def save_profile(self):
-        self.save()
-
-    @receiver(post_save, sender=User)
-    def update_user_profile(sender, instance, created, **kwargs):
-        if created:
-            Profile.objects.create(user=instance)
-        instance.profile.save()
-
-    @receiver(post_save, sender=User)
-    def save_user_profile(sender, instance, **kwargs):
-        instance.profile.save()
-
 class Hood(models.Model):
     locations = (
         ('Westlands', 'Westlands'),
@@ -93,6 +70,30 @@ class Hood(models.Model):
 
     def __str__(self):
         return self.name
+
+class Profile(models.Model):
+    profile_picture = CloudinaryField('image')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    bio = models.CharField(max_length=100)
+    full_names = models.CharField(max_length=300)
+    hood = models.ForeignKey(Hood, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.user
+
+    def save_profile(self):
+        self.save()
+
+    @receiver(post_save, sender=User)
+    def update_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+        instance.profile.save()
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()
+
 
 
 class Post(models.Model):

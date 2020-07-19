@@ -43,16 +43,16 @@
         <table class="w3-table w3-bordered">
             <tr>
                 <th>Business Name</th>
-                <th>Email address</th>
+                <th>Home Address</th>
                 <th>Category</th>
                 <th>Owner</th>
             </tr>
-            {% for biz in businesses%}
+            {% for business in businesses%}
             <tr>
-                <td>{{biz.business_name}}</td>
-                <td>{{biz.address}}</td>
-                <td>{{biz.category}}</td>
-                <td>{{biz.owner.username}}</td>
+                <td>{{business.business_name}}</td>
+                <td>{{business.address}}</td>
+                <td>{{business.category}}</td>
+                <td>{{business.owner.username}}</td>
             </tr>
             {% endfor %}
         </table>

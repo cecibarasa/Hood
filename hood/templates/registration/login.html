@@ -2,7 +2,7 @@
 <div class="container">
     <div class="card-body" style="margin-top:90px;">
         <h5 class="card-title"><span style="float:right">Not a member yet? <a
-                href="/accounts/register" class="text-info">Register now</a></span></h5>
+                href="/registration_form " class="text-info">Register now</a></span></h5>
         <div class="card-text">
             <form action="" method="post" novalidate>
                 {% csrf_token%} {{ form|crispy}}

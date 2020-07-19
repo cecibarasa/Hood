@@ -5,6 +5,7 @@ from .models import *
 from django.contrib import messages
 from . forms import *
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login,logout
 
 
 @login_required(login_url='/accounts/login/')
@@ -39,7 +40,7 @@ def upload_hood(request):
             upload = form.save(commit=False)
             hood.owner= current_user
             upload.save()
-            return redirect('home')
+            return redirect('index')
     else:
         form = HoodForm()
     return render(request, 'hoods/upload_hood.html', locals())
@@ -136,7 +137,7 @@ def upload_business(request):
         return redirect('hood',request.user.profile.hood.id)
     else:
         businessform = BusinessForm()
-    return render(request,'profile/business.html',locals())  
+    return render(request,'hoods/business.html',locals())  
 
 
 # Post view
