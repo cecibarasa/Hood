@@ -59,11 +59,11 @@ class ProfileTestCLass(TestCase):
 
 class BusinessTestClass(TestCase):
     def setUp(self):
-        self.new_user=User(username="nimz",email="nim@me.com")
+        self.new_user=User(username="jazz",email="jazz@gmail.com")
         self.new_user.save()
-        self.the_hood = Hood(name='wendani', location_name='kiambu', residents=5)
+        self.the_hood = Hood(name='kasa', location_name='kasarani', residents=5)
         self.the_hood.save()
-        self.burgers = Business(business_name='nim-burgers',address='ceciliam@gmail.com',owner=self.new_user,hood=self.the_hood)
+        self.burgers = Business(business_name='jazz-burgers',address='ceciliam@gmail.com',owner=self.new_user,hood=self.the_hood)
         self.burgers.save()
 
     def tearDown(self):
@@ -77,4 +77,22 @@ class BusinessTestClass(TestCase):
     def test_save_business(self):
         self.burgers.create_business()
         business =  Business.objects.all()
-        self.assertTrue(len(business)>0)                   
+        self.assertTrue(len(business) > 0)
+
+class PostTestClass(TestCase):
+    def setUp(self):
+        self.new_user = User(username="jazz", email="jazz@gmail.com")
+        self.new_user.save()
+        self.the_hood = Hood(name='kasa', location_name='kasarani', residents=5)
+        self.the_hood.save()
+
+        self.new_post=Post(title = 'Robbed',description = 'I was robbed')
+
+    def tearDown(self):
+        User.objects.all().delete()
+        Hood.objects.all().delete()
+        User.objects.all().delete()
+        Post.objects.all().delete()
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.new_post,Post))                            
