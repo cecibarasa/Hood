@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from django.urls import re_path, path, include
 
 urlpatterns = [
-    url('^$', views.index, name='index'),
+    url(r'^$', views.index, name='index'),
     url(r'^upload/', views.upload_hood, name='upload'),
     url(r'^profile/(?P<username>\w+)', views.profile, name='profile'),
     url(r'^accounts/update/', views.edit, name='update_profile'),

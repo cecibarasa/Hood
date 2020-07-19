@@ -1,21 +1,4 @@
 {% extends 'hoods/base.html' %} {% load static%} {% block content %}
-<div class="w3-display-container" id="home">
-
-    <div class="w3-display-middle w3-center">
-        <h3 class="w3-text-white">Find Your Best Hood</h3>
-        <form class="navbar-form " role="search" action="{% url 'search_results' %}">
-            <input type="text" name="search" placeholder="&#xF002;  Search Hood" id="input" class="w3-input w3-round-xxlarge" style="font-family: FontAwesome; font-style: normal;  font-weight: normal; text-decoration: inherit; width:500px;">
-        </form>
-        {% if request.user.profile.hood %}
-        <small class="w3-text-white">
-            <button class='btn' style="background-color: #EB4762">
-                <a href="{% url 'index' hood_id=request.user.profile.hood.id %}"> View Your Current Hood </a>
-            </button>
-        </small> {% else %}
-
-    </div>
-</div>
-
 <div class="w3-container">
     <div class="w3-row">
         <h2 class="w3-center"></h2>
@@ -24,8 +7,8 @@
             <div class="w3-card-4 w3-white" style="padding-bottom:5px;padding-top:3px;">
                 <div class="w3-container w3-margin">
                     <a href="{% url 'hood' hood_id=hood.id %}">
-                        <strong><i class="fas fa-map-marker-alt"></i> {{ hood.name }}, </strong>
-                        <strong>{{hood.location}}</strong>
+                        <strong><i class="fas fa-map-marker-alt"></i> {{ hood.location_name }}, </strong>
+                        <strong>{{hood.name}}</strong>
                     </a>
                 </div>
 
@@ -44,4 +27,4 @@
     </div>
 
 </div>
-{% endif %} {% endblock %}
+{% endblock %}

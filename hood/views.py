@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse,Http404
+from django.http import HttpResponse, Http404
+from django.http import HttpResponseRedirect, JsonResponse
 from .models import *
 from django.contrib import messages
 from . forms import *
@@ -8,10 +9,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login,logout
 
 
-@login_required(login_url='/accounts/login/')
+# @login_required(login_url='/accounts/login/')
 def index(request):
     hoods = Hood.objects.all()
-    return render(request,'hoods/index.html',locals())
+    return render(request, 'hoods/index.html',{"hoods":hoods})
+    
 def signup(request):
     global register_form
     if request.method == 'POST':
@@ -22,7 +24,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('/')
+            return redirect('index')
     else:
         form = SignupForm()
         register_form = {
@@ -54,7 +56,7 @@ def hood(request,hood_id):
     businesses = Business.get_business(hood_id)
     posts = Post.get_post(hood_id)
 
-    return render(request,'hoods/hood.html',locals())
+    return render(request,'hoods/hood.html',{"hood_name":hood_name,"hood":hood,"businesses":businesses,"posts":posts})
 
 
 @login_required(login_url='/accounts/login')
@@ -77,10 +79,10 @@ def leave(request,hood_id):
 def search_results(request):
     if 'search' in request.GET and request.GET['search']:
         search_term = request.GET.get('search')
-        searched_hood = Hood.search_hood(search_term)
+        searched_business = Business.search_business(search_term)
         message = f"{search_term}"
 
-        return render(request, 'hoods/search_hood.html',locals())
+        return render(request, 'hoods/search_business.html',locals())
 
     else:
         message = "You haven't searched for any term"
@@ -90,37 +92,43 @@ def search_results(request):
 # Views for profile
 @login_required(login_url='/accounts/login/')
 def profile(request, username):
+    if request.method == 'POST':
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        prof_form = UpdateUserProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if user_form.is_valid() and prof_form.is_valid():
+            user_form.save()
+            prof_form.save()
+            return HttpResponseRedirect(request.path_info)
+    else:
+        user_form = UpdateUserForm(instance=request.user)
+        prof_form = UpdateUserProfileForm(instance=request.user.profile)
+    params = {
+        'user_form': user_form,
+        'prof_form': prof_form,
 
-    profile = User.objects.get(username=username)
-    print(profile.id)
-    try:
-        profile_details = Profile.get_by_id(profile.id)
-    except:
-        pass
-    user = request.user
-    profile = User.objects.get(username=username)
-    title = f'@{profile.username} '
+    }
+    return render(request, 'profile/profile.html', params)
 
-    return render(request, 'profile/profile.html', locals()) 
 
 
 @login_required(login_url='/accounts/login/')
 def edit(request):
-    current_user = request.user
-    user = Profile.objects.get(user=current_user)
-    profile = User.objects.get(username=request.user)
-
-
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=user)
-        if form.is_valid():
-            edit = form.save(commit=False)
-            edit.user = request.user
-            edit.save()
-            return redirect('profile/profile.html')
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        prof_form = UpdateUserProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if user_form.is_valid() and prof_form.is_valid():
+            user_form.save()
+            prof_form.save()
+            return HttpResponseRedirect(request.path_info)
     else:
-        form = ProfileForm(instance=user)
-    return render(request, 'profile/edit_profile.html', locals()) 
+        user_form = UpdateUserForm(instance=request.user)
+        prof_form = UpdateUserProfileForm(instance=request.user.profile)
+    params = {
+        'user_form': user_form,
+        'prof_form': prof_form,
+
+    }
+    return render(request, 'profile/edit_profile.html', params)
 
 
 # business views

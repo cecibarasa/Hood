@@ -51,9 +51,6 @@ class Hood(models.Model):
     residents = models.CharField(max_length=100)
     location_name = models.CharField(max_length=100, choices=locations)
 
-    class Meta:
-            ordering = ['-pk']
-
     def save_hood(self):
         self.save()
 
@@ -64,16 +61,19 @@ class Hood(models.Model):
 
     @classmethod
     def search_hood(cls, search_term):
-        hood = Hood.objects.filter(name__icontains=search_term)
+        hood = Hood.objects.filter(location__name__icontains=search_term)
         return hood
 
+    @classmethod
+    def display_all_hoods(cls):
+        return cls.objects.all()
 
     def __str__(self):
         return self.name
 
 class Profile(models.Model):
     profile_picture = CloudinaryField('image')
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.CharField(max_length=100)
     full_names = models.CharField(max_length=300)
     hood = models.ForeignKey(Hood, on_delete=models.CASCADE, null=True)
@@ -130,4 +130,9 @@ class Business(models.Model):
     @classmethod
     def get_business(cls, id):
         business = Business.objects.filter(hood__pk=id)
-        return business                             
+        return business
+
+    @classmethod
+    def search_business(cls, search_term):
+        business = Business.objects.filter(category__icontains=search_term)
+        return business                                 

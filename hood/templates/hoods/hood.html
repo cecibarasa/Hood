@@ -2,19 +2,17 @@
 <div class="w3-display-container w3-animate-opacity ">
     <img src="{{hood.image.url}} " alt="hourglass" style="width:100%;min-height:350px;max-height:400px;filter: brightness(40%);">
     <div class="w3-display-topmiddle w3-text-white w3-center w3-padding-top" style="margin-top:5%">
-        <strong class="w3-xlarge"><i class="fas fa-map-marker-alt "></i> {{ hood.name }}, </strong>
-        <strong class="w3-xlarge">{{hood.location}}</strong>
+        <strong class="w3-xlarge"><i class="fas fa-map-marker-alt "></i> {{hood.location_name}}, </strong>
+        <strong class="w3-xlarge">{{hood.name}}</strong>
     </div>
 
     <div class="w3-display-middle  w3-center ">
-        <form class="navbar-form " role="search" action="#">
-            <input type="text" name="Category" placeholder="&#xF002;  Search Business Category" id="input" class="w3-input w3-round-xxlarge" style="font-family: FontAwesome;
+        <form class="navbar-form " role="search" action="{% url 'search_results' %}">
+            <input type="text" name="search" placeholder="&#xF002;  Search Business Category" id="input" class="w3-input w3-round-xxlarge" style="font-family: FontAwesome;
     font-style: normal;
     font-weight: normal;
     text-decoration: inherit; width:200px;">
         </form>
-
-        <strong class="w3-xlarge">Hood-Admin: {{hood.owner}}</strong>
     </div>
 
     <div class="w3-display-bottomright">
@@ -88,7 +86,6 @@
                                     <i>
                                         <p>{{post.description}}</p>
                                     </i></p>
-                                <p>~ {{user.username}}</p>
                             </blockquote>
                         </footer>
 
@@ -118,9 +115,8 @@
 
                         <div class="w3-container w3-margin">
 
-                            <p><i class="fas fa-at"></i> {{hood.name}} General Hospital</p>
-                            <hr>
-                            <p><i class="fas fa-map-marker-alt"></i> {{hood.name}} Main Road</p>
+
+                            <p><i class="fas fa-map-marker-alt"></i> {{hood.location_name}} Main Road</p>
                             <hr>
                             <p><i class="fas fa-phone"></i>Emergency contact: 07111222333</p>
                             <hr>
@@ -141,10 +137,7 @@
                             <hr>
                         </header>
                         <div class="w3-container w3-margin">
-
-                            <p><i class="fas fa-at"></i> {{hood.name}} Police Station</p>
-                            <hr>
-                            <p><i class="fas fa-map-marker-alt"></i> {{hood.name}} Main Road </p>
+                            <p><i class="fas fa-map-marker-alt"></i> {{hood.location_name}} Main Road </p>
                             <hr>
                             <p><i class="fas fa-phone"></i> Emergency contact: 911</p>
                             <hr>

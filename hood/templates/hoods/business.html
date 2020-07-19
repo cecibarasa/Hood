@@ -1,9 +1,9 @@
-{% extends 'hoods/base.html' %} {% load bootstrap3 %} {% block content %}
+{% extends 'hoods/base.html' %} {% load bootstrap3 %} {% load crispy_forms_tags %}{% block content %}
 <div class="container">
     <div class="row">
         <div class="col-md-8">
             <form action="{% url 'upload_business' %}" method="POST" enctype="multipart/form-data">
-                {% csrf_token %} {% bootstrap_form businessform %}
+                {% csrf_token %} {{businessform|crispy }}
                 <input type="submit" class="btn btn-success btn-lg" value="POST">
             </form>
         </div>
