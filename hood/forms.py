@@ -30,7 +30,7 @@ class UpdateUserProfileForm(forms.ModelForm):
 class BusinessForm(forms.ModelForm):
     class Meta:
         model  = Business
-        fields = ['business_name','hood','address','owner','category']
+        fields = ['business_name','address','owner','category']
 
 
 class PostForm(forms.ModelForm):

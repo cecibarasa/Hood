@@ -6,15 +6,6 @@
         <strong class="w3-xlarge">{{hood.name}}</strong>
     </div>
 
-    <div class="w3-display-middle  w3-center ">
-        <form class="navbar-form " role="search" action="{% url 'search_results' %}">
-            <input type="text" name="search" placeholder="&#xF002;  Search Business Category" id="input" class="w3-input w3-round-xxlarge" style="font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: inherit; width:200px;">
-        </form>
-    </div>
-
     <div class="w3-display-bottomright">
         <p>
             <a class="info w3-btn w3-round-xxlarge w3-pink w3-text-white w3-margin-right" href="{% url 'leave' hood_id=hood.id %}">Leave Hood </a>
@@ -33,7 +24,7 @@
     <div class="w3-row">
         <div class=" w3-padding w3-center">
             <a href="/upload_business"><i class="fas fa-briefcase fa-2x w3-center w3-text-pink"></i>
-                <h3><strong>Businesses</strong></h3>
+                <h3><strong>Add Businesses</strong></h3>
             </a>
             <hr>
         </div>
@@ -60,7 +51,7 @@
     <div class="w3-row">
         <div class=" w3-padding w3-center">
             <a href="/post"><i class="fas fa-pen-square fa-2x w3-center w3-text-pink"></i>
-                <h3><strong>Street Smarts</strong></h3>
+                <h3><strong>Word On The street</strong></h3>
             </a>
             <hr>
         </div>

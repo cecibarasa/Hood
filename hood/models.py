@@ -61,7 +61,7 @@ class Hood(models.Model):
 
     @classmethod
     def search_hood(cls, search_term):
-        hood = Hood.objects.filter(location__name__icontains=search_term)
+        hood = Hood.objects.filter(name__icontains=search_term)
         return hood
 
     @classmethod
