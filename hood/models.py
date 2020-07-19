@@ -135,4 +135,4 @@ class Business(models.Model):
     @classmethod
     def search_business(cls, search_term):
         business = Business.objects.filter(category__icontains=search_term)
-        return business                                 
+        return business                                

@@ -79,10 +79,10 @@ def leave(request,hood_id):
 def search_results(request):
     if 'search' in request.GET and request.GET['search']:
         search_term = request.GET.get('search')
-        searched_hood = Hood.search_hood(search_term)
+        searched_business = Business.search_business(search_term)
         message = f"{search_term}"
 
-        return render(request, 'hoods/search_hood.html',locals())
+        return render(request, 'hoods/search_business.html',locals())
 
     else:
         message = "You haven't searched for any term"
