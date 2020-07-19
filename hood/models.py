@@ -73,7 +73,7 @@ class Hood(models.Model):
 
 class Profile(models.Model):
     profile_picture = CloudinaryField('image')
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     bio = models.CharField(max_length=100)
     full_names = models.CharField(max_length=300)
     hood = models.ForeignKey(Hood, on_delete=models.CASCADE, null=True)
