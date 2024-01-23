@@ -13,35 +13,35 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import cloudinary
 import django_heroku
-import dj_database_url
-from decouple import config, Csv
+# import dj_database_url
+# from decouple import config, Csv
 
-MODE = config("MODE", default="dev")
-DEBUG = config('DEBUG', default=False, cast=bool)
+# MODE = config("MODE", default="dev")
+# DEBUG = config('DEBUG', default=False, cast=bool)
 
-if config('MODE')=="prod":
-    DATABASES = {
-       'default': {
-           'ENGINE': 'django.db.backends.postgresql_psycopg2',
-           'NAME': config('DB_NAME'),
-           'USER': config('DB_USER'),
-           'PASSWORD': config('DB_PASSWORD'),
-           'HOST': config('DB_HOST'),
-           'PORT': '',
-       }
+# if config('MODE')=="dev":
+#     DATABASES = {
+#        'default': {
+#            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#            'NAME': config('DB_NAME'),
+#            'USER': config('DB_USER'),
+#            'PASSWORD': config('DB_PASSWORD'),
+#            'HOST': config('DB_HOST'),
+#            'PORT': '',
+#        }
        
-   }
-# production
-else:
-   DATABASES = {
-       'default': dj_database_url.config(
-           default=config('DATABASE_URL')
-       )
-   }
+#    }
+# # production
+# else:
+#    DATABASES = {
+#        'default': dj_database_url.config(
+#            default=config('DATABASE_URL')
+#        )
+#    }
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
+# ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -61,6 +61,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# server {
+#     listen 80 default_server;
+#     return 444;
+# }
 
 # Application definition
 
@@ -75,7 +79,11 @@ INSTALLED_APPS = [
     'bootstrap3',
     'crispy_forms',
     'cloudinary',
+    'daphne',
 ]
+
+ASGI_APPLICATION = "myproject.asgi.application"
+
 
 cloudinary.config (
     cloud_name = 'deabsqrhn',

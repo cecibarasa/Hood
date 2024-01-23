@@ -11,6 +11,10 @@ import os
 
 from django.core.asgi import get_asgi_application
 
+from some_asgi_library import AmazingMiddleware
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Hood.settings')
 
 application = get_asgi_application()
+
+application = AmazingMiddleware(application)
